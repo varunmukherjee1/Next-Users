@@ -1,4 +1,6 @@
-import './globals.css'
+import "@/styles/globals.css"
+
+import {inter} from '@/styles/fonts'
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,7 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className = {inter.className}>
+        {children}
+      </body>
     </html>
   )
 }
