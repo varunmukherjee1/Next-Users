@@ -1,0 +1,64 @@
+.nav {
+    background-color: var(--black);
+    display: flex;
+    padding: 1rem 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+}
+
+.logo {
+    font-size: 2.7rem;
+    color: white;
+    border-right: 2px solid var(--white);
+    padding-right: 1.5rem;
+    margin-right: 0.8rem;
+}
+
+.left p {
+    font-size: 1.7rem;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+}
+
+.left p:hover {
+    color: var(--yellow);
+    border-color: var(--yellow);
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;    
+    
+}
+
+.right p {
+    color: white;
+    max-width: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-overflow: ellipsis;
+}
+
+.right img {
+    background-color: white;
+    border-radius: 50%;
+}
+
+.active {
+    color: var(--yellow) !important;
+    border-color: var(--yellow) !important;
+}
