@@ -24,13 +24,8 @@ const Login:React.FC = () => {
     const loginUser = async () => {
         try {
             const res = await signInWithPopup(auth,provider)   
-            const cred = GoogleAuthProvider.credentialFromResult(res);
-            const token = cred!.accessToken;
             const user = res.user;
             const data:any = await user.toJSON();
-
-            console.log("user");
-            console.log(data);
 
             dispatch(userActions.setUser({
                 uid: data.uid,
