@@ -3,7 +3,7 @@
 import React,{useState, useEffect} from 'react'
 import { useSelector } from 'react-redux'
 import toast from "react-hot-toast"
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, deleteField, setDoc } from "firebase/firestore";
 
 import { User, LoginUser } from '@/utils/types'
 import { db } from '@/utils/firebase';
@@ -48,9 +48,31 @@ const SavedUsers:React.FC = () => {
     fetchUsers();
   },[])
 
-  const removeHandler = () => {
+  const removeUser = async (id: number) => {
+    setRemoving(true)
+    try {
+      const docRef = doc(db,"data",user.uid);
+      const res = await setDoc(
+          docRef,
+          {
+              "users": {
+                  [id]: deleteField()
+              }
+          },
+          { merge: true}            
+      )
 
-  }
+      setUsers(users.filter((val) => val.id !== id))
+        
+      setRemoving(false)
+      toast.success("User Removed!")
+
+    } catch (error) {
+        setRemoving(false);
+        console.log(error);
+        toast.error("Something went wrong")
+    }
+}
 
   return (
     <section className = {classes.sec}>
@@ -63,7 +85,7 @@ const SavedUsers:React.FC = () => {
                 <p className = {classes.status}>No Users !</p>
             }
             {users.map((val) => (
-                <UserCard obj = {val} key = {val.id} type = "contact"/>
+                <UserCard obj = {val} key = {val.id} type = "contact" removeHandler={removeUser}/>
             ))}
         </div>
     </section>

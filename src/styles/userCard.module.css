@@ -50,3 +50,11 @@
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
+.remove {
+    background-color: rgb(207, 57, 57) !important;
+}
+
+.remove:hover {
+    background-color: red !important;
+}
