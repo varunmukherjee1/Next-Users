@@ -11,10 +11,11 @@ const FetchUsers:React.FC = () => {
 
     const [users,setUsers] = useState<User[]>([])
     const [loading, setLoading] = useState(false);
+    const [fetching, setFetching] = useState(false);
 
     const fetchUsers = async () => {
         try {
-            setLoading(true);
+            setFetching(true);
             const res = await fetch(
                 'https://random-data-api.com/api/v2/users?size=5',
                 {
@@ -22,8 +23,8 @@ const FetchUsers:React.FC = () => {
                 }
             )
             const data = await res.json();
-            setLoading(false);
-
+            setFetching(false);
+            
             setUsers(data.map((val:any) => ({
                 name: val.first_name + " " + val.last_name,
                 id: val.id,
@@ -32,6 +33,7 @@ const FetchUsers:React.FC = () => {
                 dob: val.date_of_birth
             })))
         } catch (error) {
+            setFetching(false);
             console.log(error);
         }
     }
@@ -52,7 +54,7 @@ const FetchUsers:React.FC = () => {
                     <p className = {classes.status}>No Users !</p>
                 }
                 {users.map((val) => (
-                    <UserCard obj = {val} key = {val.id}/>
+                    <UserCard obj = {val} key = {val.id} type = "fetch"/>
                 ))}
             </div>
         </section>

@@ -13,9 +13,10 @@ import classes from "@/styles/userCard.module.css"
 
 interface Props {
     obj: User
+    type: string
 }
 
-const UserCard:React.FC<Props> = ({obj}) => {
+const UserCard:React.FC<Props> = ({obj,type}) => {
 
     const [loading,setLoading] = useState(false);
 
@@ -61,7 +62,7 @@ const UserCard:React.FC<Props> = ({obj}) => {
                 <p><strong>DOB</strong>: {obj.dob}</p>
             </div>
 
-            <button onClick = {saveUser}>{loading? "Saving...":"Save"}</button>
+            {type === "fetch" && <button onClick = {saveUser}>{loading? "Saving...":"Save"}</button>}
         </div>
     )
 }
