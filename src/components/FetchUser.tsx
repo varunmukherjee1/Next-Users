@@ -15,12 +15,17 @@ const FetchUsers:React.FC = () => {
     const fetchUsers = async () => {
         try {
             setLoading(true);
-            const res = await fetch('https://random-data-api.com/api/v2/users?size=5')
+            const res = await fetch(
+                'https://random-data-api.com/api/v2/users?size=5',
+                {
+                    cache: "no-store"
+                }
+            )
             const data = await res.json();
             setLoading(false);
 
             setUsers(data.map((val:any) => ({
-                name: val.first_name + val.last_name,
+                name: val.first_name + " " + val.last_name,
                 id: val.id,
                 email: val.email,
                 image: val.avatar,
