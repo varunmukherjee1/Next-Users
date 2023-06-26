@@ -40,7 +40,8 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;    
-    
+    position: relative;
+    cursor: pointer;
 }
 
 .right p {
@@ -61,4 +62,25 @@
 .active {
     color: var(--yellow) !important;
     border-color: var(--yellow) !important;
+}
+
+.modal {
+    position: absolute;
+    top: 115%;
+    background-color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.modal:hover {
+    background-color: rgb(229, 229, 229);
+}
+
+.modal p {
+    color: var(--black);
+    font-size: 1.8rem;
+    font-weight: 600;
+    padding: 6px 15px;
 }

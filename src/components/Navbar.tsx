@@ -1,8 +1,13 @@
 'use client'
 
-import React from 'react'
+import React,{useState} from 'react'
 import Image from 'next/image'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { signOut } from 'firebase/auth'
+
+import { userActions } from '@/store/userSlice'
+import { auth } from '@/utils/firebase'
+import toast from "react-hot-toast"
 
 import classes from '@/styles/navbar.module.css'
 
@@ -13,7 +18,20 @@ interface Props {
 
 const Navbar:React.FC<Props> = (props) => {
 
+    const [modal,setModal] = useState(false)
     const user = useSelector((state: any) => state.user.user)
+    const dispatch = useDispatch()
+
+    const signOutHandler = async () => {
+        try {
+            const res = await signOut(auth);
+            dispatch(userActions.clearUser())
+            toast.success("Logged Out")
+        } catch (error) {
+            console.log(error);
+            toast.error("Something went wrong")
+        }
+    }
 
     return (
         <nav className = {classes.nav}>
@@ -34,7 +52,10 @@ const Navbar:React.FC<Props> = (props) => {
                     Saved Users
                 </p>
             </div>
-            <div className = {classes.right}>
+            <div 
+                className = {classes.right}
+                onClick = {() => setModal(!modal)}
+            >
                 <Image 
                     src={user.image}
                     alt = "google logo"
@@ -42,6 +63,11 @@ const Navbar:React.FC<Props> = (props) => {
                     height = "35"
                 />
                 <p>{user.name}</p>
+                {modal && 
+                    <div className = {classes.modal} onClick = {signOutHandler}>
+                        <p>Logout</p>
+                    </div>
+                }
             </div>
         </nav>
     )
