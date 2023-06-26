@@ -3,11 +3,12 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { useRouter } from 'next/navigation'
 
-// import Login from '@/components/Login'
+import Login from '@/components/Login'
+import Dashboard from '@/components/Dashboard'
 import { auth } from '@/utils/firebase'
 import { userActions } from '@/store/userSlice'
+
 
 import { onAuthStateChanged } from 'firebase/auth'
 
@@ -15,7 +16,6 @@ export default function Home() {
 
   const user = useSelector((state:any) => state.user.user);
   const dispatch = useDispatch();
-  const router = useRouter();
 
   useEffect(() => {
     onAuthStateChanged(auth,(data) => {
@@ -32,15 +32,10 @@ export default function Home() {
     })
   },[])
 
-  if(user === null){
-    router.replace("/login")
-  }
-  else{
-    router.replace("/dashboard/users")
-  }
-
   return (
     <>
+      {!user && <Login/>}
+      {user && <Dashboard/>}
     </>
   )
 }

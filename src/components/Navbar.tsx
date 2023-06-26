@@ -2,22 +2,18 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { useRouter,usePathname } from 'next/navigation'
+import { useSelector } from 'react-redux'
 
 import classes from '@/styles/navbar.module.css'
 
-const Navbar = () => {
+interface Props {
+    page: boolean,
+    setPage: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-    const router = useRouter();
-    const pathname = usePathname();
+const Navbar:React.FC<Props> = (props) => {
 
-    const routeUsers = () => {
-        router.push('/dashboard/users')
-    }
-
-    const routeSavedUsers = () => {
-        router.push('/dashboard/saved_users')
-    }
+    const user = useSelector((state: any) => state.user.user)
 
     return (
         <nav className = {classes.nav}>
@@ -26,26 +22,26 @@ const Navbar = () => {
                     Nxt-Users
                 </h1>
                 <p 
-                    onClick = {routeUsers}
-                    className = {`${(pathname === '/dashboard/users')? classes.active:''}`}
+                    onClick = {() => {props.setPage(true)}}
+                    className = {`${(props.page === true)? classes.active:''}`}
                 >
                     Users
                 </p>
                 <p 
-                    onClick = {routeSavedUsers}
-                    className = {`${(pathname === '/dashboard/saved_users')? classes.active:''}`}
+                    onClick = {() => {props.setPage(false)}}
+                    className = {`${(props.page === false)? classes.active:''}`}
                 >
                     Saved Users
                 </p>
             </div>
             <div className = {classes.right}>
                 <Image 
-                    src={"/google_logo.svg"}
+                    src={user.image}
                     alt = "google logo"
                     width = "35"
                     height = "35"
                 />
-                <p>Varun</p>
+                <p>{user.name}</p>
             </div>
         </nav>
     )

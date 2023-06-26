@@ -7,7 +7,7 @@ import UserCard from '@/components/UserCard'
 
 import classes from '@/styles/userPage.module.css'
 
-const Page:React.FC = () => {
+const FetchUsers:React.FC = () => {
 
     const [users,setUsers] = useState<User[]>([])
     const [loading, setLoading] = useState(false);
@@ -17,7 +17,6 @@ const Page:React.FC = () => {
             setLoading(true);
             const res = await fetch('https://random-data-api.com/api/v2/users?size=5')
             const data = await res.json();
-            console.log(data);
             setLoading(false);
 
             setUsers(data.map((val:any) => ({
@@ -55,7 +54,7 @@ const Page:React.FC = () => {
     )
 }
 
-export default Page
+export default FetchUsers
 
 // {
 //     id: 9113,
