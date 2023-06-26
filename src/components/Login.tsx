@@ -18,9 +18,6 @@ const Login:React.FC = () => {
     const router = useRouter(); 
     const userData = useSelector((state:any) => state.user.user)   
 
-    console.log("login");
-    console.log(userData);
-
     if(userData !== null)
         router.replace("/dashboard/users")
 

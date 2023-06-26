@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 
+
 import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import { auth } from '@/utils/firebase'
@@ -19,8 +20,6 @@ export default function Home() {
 
   useEffect(() => {
     onAuthStateChanged(auth,(data) => {
-      console.log("effect");
-      console.log(data);
 
       if(data !== null)
         dispatch(userActions.setUser({
