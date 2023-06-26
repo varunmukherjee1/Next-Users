@@ -21,15 +21,15 @@ const UserCard:React.FC<Props> = ({obj}) => {
                 <Image
                     src = {obj.image}
                     alt = "profile_img"
-                    height = "50"
-                    width = "50"
+                    height = "100"
+                    width = "100"
                 />
             </div>
 
             <div className = {classes.details}>
-                <p><strong>Name</strong>: obj.name</p>
-                <p><strong>Email</strong>: obj.email</p>
-                <p><strong>DOB</strong>: obj.dob</p>
+                <p><strong>Name</strong>: {obj.name}</p>
+                <p><strong>Email</strong>: {obj.email}</p>
+                <p><strong>DOB</strong>: {obj.dob}</p>
             </div>
 
             <button onClick = {saveUser}>Save</button>

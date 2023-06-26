@@ -5,3 +5,10 @@ export type User = {
     image: string,
     dob: string,
 }
+
+export type LoginUser = {
+    uid: string,
+    email: string,
+    name: string,
+    image: string
+}

@@ -1,6 +1,12 @@
+'use client'
+
+import { Provider } from "react-redux"
+import { Toaster } from "react-hot-toast"
+
 import "@/styles/globals.css"
 
 import {inter} from '@/styles/fonts'
+import store from "@/store/store"
 
 export const metadata = {
   title: 'Create Next App',
@@ -15,7 +21,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className = {inter.className}>
-        {children}
+        <Toaster
+          position="top-center"
+          reverseOrder= {false}
+          toastOptions={{
+            style: {
+              fontSize: "1.5rem"
+            }
+          }}
+        />
+        <Provider store = {store}>
+          {children}
+        </Provider>
       </body>
     </html>
   )

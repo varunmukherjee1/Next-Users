@@ -10,12 +10,15 @@ import classes from '@/styles/userPage.module.css'
 const Page:React.FC = () => {
 
     const [users,setUsers] = useState<User[]>([])
+    const [loading, setLoading] = useState(false);
 
     const fetchUsers = async () => {
         try {
+            setLoading(true);
             const res = await fetch('https://random-data-api.com/api/v2/users?size=5')
             const data = await res.json();
             console.log(data);
+            setLoading(false);
 
             setUsers(data.map((val:any) => ({
                 name: val.first_name + val.last_name,
@@ -35,11 +38,14 @@ const Page:React.FC = () => {
                 className = {classes.fetch}
                 onClick = {fetchUsers}
             >
-                Fetch User
+                <p>Fetch Users</p>
             </button>
             <div className = {classes.users}>
-                {users.length === 0 && 
-                    <p>No Users !</p>
+                {loading &&
+                    <p className = {classes.status}>Loading ...</p>
+                }
+                {!loading && users.length === 0 && 
+                    <p className = {classes.status}>No Users !</p>
                 }
                 {users.map((val) => (
                     <UserCard obj = {val} key = {val.id}/>
@@ -50,3 +56,11 @@ const Page:React.FC = () => {
 }
 
 export default Page
+
+// {
+//     id: 9113,
+//     name: 'John Cena',
+//     email: "dot.durgan@email.com",
+//     image: "https://robohash.org/aliquidlaudantiumullam.png?size=300x300&set=set1",
+//     dob: "1966-01-16"
+// }
