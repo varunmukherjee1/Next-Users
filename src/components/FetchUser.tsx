@@ -44,7 +44,7 @@ const FetchUsers:React.FC = () => {
                 className = {classes.fetch}
                 onClick = {fetchUsers}
             >
-                <p>Fetch Users</p>
+                <p>{fetching? "Fetching...":"Fetch Users"}</p>
             </button>
             <div className = {classes.users}>
                 {loading &&
